@@ -21,6 +21,7 @@ target/
 
 # Alfresco
 alf_data_dev/
+alf_data/
 alfresco.log
 alfresco.log.*
 share.log
