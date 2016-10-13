@@ -23,8 +23,8 @@
     <properties>
         <!-- The following are default values for data location and Alfresco Community version.
              Uncomment if you need to change (Note. current default version for Enterprise edition is 5.0.1)
-          <alfresco.version>5.0.d</alfresco.version>
           <alfresco.data.location>/absolute/path/to/alf_data_dev</alfresco.data.location> -->
+          <alfresco.version>5.0.2.5</alfresco.version>
 
         <!-- This control the root logging level for all apps uncomment and change, defaults to WARN
             <app.log.root.level>WARN</app.log.root.level>
@@ -55,14 +55,28 @@
         </dependencies>
     </dependencyManagement>
 
+    <repositories>
+        <repository>
+          <id>alfresco-private-repository</id>
+          <url>https://artifacts.alfresco.com/nexus/content/groups/private</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Following dependencies are needed for compiling Java code in src/main/java;
              <scope>provided</scope> is inherited for each of the following;
              for more info, please refer to alfresco-platform-distribution POM -->
-        <dependency>
-            <groupId>${alfresco.groupId}</groupId>
-            <artifactId>alfresco-repository</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-enterprise-repository</artifactId>
+			<version>${alfresco.version}</version>
+		</dependency>
     </dependencies>
 
     <profiles>
