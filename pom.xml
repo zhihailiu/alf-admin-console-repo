@@ -76,6 +76,7 @@
 			<groupId>org.alfresco</groupId>
 			<artifactId>alfresco-enterprise-repository</artifactId>
 			<version>${alfresco.version}</version>
+			<scope>provided</scope>
 		</dependency>
     </dependencies>
 
