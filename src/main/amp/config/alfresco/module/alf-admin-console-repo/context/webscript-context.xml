@@ -16,9 +16,4 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<beans>
-	<bean id="webscript.helloworld.get"
-		  class="com.acme.adminconsole.demoamp.HelloWorldWebScript"
-		  parent="webscript">
-	</bean>
-</beans>
+<beans />
