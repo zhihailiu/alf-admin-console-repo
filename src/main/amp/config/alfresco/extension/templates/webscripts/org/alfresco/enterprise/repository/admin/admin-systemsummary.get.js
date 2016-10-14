@@ -210,7 +210,7 @@ function main()
          ["NumberOfUsers", "NumberOfGroups"]
          );
 
-   //Repository Usage, Document Count
+   //Customization: Repository Usage, Document Count
    model.repositoryUsageAttributes = Admin.getMBeanAttributes(
          "Alfresco:Name=RepositoryUsage",
          ["DocumentCount"]

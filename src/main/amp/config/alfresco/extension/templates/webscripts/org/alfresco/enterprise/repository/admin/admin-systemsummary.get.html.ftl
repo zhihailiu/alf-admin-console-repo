@@ -144,6 +144,7 @@
       <@attrfield attribute=authorityAttributes["NumberOfUsers"] label=msg("systemsummary.users-groups.users") />
       <@attrfield attribute=authorityAttributes["NumberOfGroups"] label=msg("systemsummary.users-groups.groups") />
 
+      <#-- Customization -->
       <@section label=msg("systemsummary.repository-usage") />
       <@attrfield attribute=repositoryUsageAttributes["DocumentCount"] label=msg("systemsummary.repository-usage.documents") />
    </div>   
