@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    Queries related to repository usage
+-->
+<mapper namespace="acme.query.repositoryUsage">
+
+    <!-- Count documents -->
+    <!-- Source: http://pavelmakhov.com/2015/05/usefule-alfresco-queries -->
+    <select id="select_DocumentCount" resultType="long">
+        select count(*) from alf_node nd, alf_qname qn, alf_namespace ns where qn.ns_id = ns.id and nd.type_qname_id = qn.id and ns.uri = 'http://www.alfresco.org/model/content/1.0' and qn.local_name = 'content';
+    </select>
+    
+</mapper>

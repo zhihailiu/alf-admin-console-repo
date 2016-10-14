@@ -32,27 +32,44 @@
 		<property name="nodeLocatorService" ref="nodeLocatorService" />
 	</bean>
 
-    <!-- override -->
-	<bean id="usageServiceImpl"
-		class="com.acme.adminconsole.extension.RepositoryUsageServiceImpl">
-		<property name="usageDAO" ref="usageDAO" />
-	</bean>
-
-    <!-- override -->
-	<bean id="usageDAO" class="com.acme.adminconsole.extension.RepositoryUsageDAOImpl">
-		<property name="sqlSessionTemplate" ref="repoSqlSessionTemplate" />
-		<property name="qnameDAO" ref="qnameDAO" />
-		<property name="nodeDAO" ref="nodeDAO" />
-	</bean>
 
 	<!-- JMX MBean, Alfresco > RepositoryUsage -->
 	<bean id="RepositoryUsageResource" parent="managedResource">
 		<property name="resource">
 			<bean class="com.acme.adminconsole.extension.RepositoryUsage">
-				<property name="repositoryUsageService" ref="usageServiceImpl" />
+				<property name="repositoryUsageService" ref="repositoryUsageService" />
 				<property name="transactionService" ref="transactionService" />
 			</bean>
 		</property>
 	</bean>
+
+    <bean id="repositoryUsageService"
+        class="com.acme.adminconsole.extension.RepositoryUsageServiceImpl">
+        <property name="repositoryUsageDAO" ref="repositoryUsageDAO" />
+    </bean>
+
+    <bean id="repositoryUsageDAO" class="com.acme.adminconsole.extension.RepositoryUsageDAOImpl">
+        <property name="cannedQueryDAO" ref="acme.cannedQueryDAO" />
+    </bean>
+
+	<bean id="acme.cannedQueryDAO"
+		class="org.alfresco.repo.domain.query.ibatis.CannedQueryDAOImpl"
+		init-method="init">
+		<property name="sqlSessionTemplate" ref="acme.repoSqlSessionTemplate" />
+		<property name="controlDAO" ref="controlDAO" />
+	</bean>
+
+    <bean id="acme.repoSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="acme.repoSqlSessionFactory"/>
+    </bean>
+
+    <!-- MyBatis config -->
+    <bean id="acme.repoSqlSessionFactory" class="org.alfresco.ibatis.HierarchicalSqlSessionFactoryBean">
+        <property name="resourceLoader" ref="dialectResourceLoader"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation">
+            <value>classpath:alfresco/extension/ibatis/acme-alfresco-SqlMapConfig.xml</value>
+        </property>
+    </bean>
 
 </beans>

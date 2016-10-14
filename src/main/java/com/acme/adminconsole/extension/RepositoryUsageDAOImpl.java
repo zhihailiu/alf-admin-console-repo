@@ -1,20 +1,24 @@
 package com.acme.adminconsole.extension;
 
-import org.alfresco.repo.domain.usage.ibatis.UsageDAOImpl;
+import org.alfresco.repo.domain.query.CannedQueryDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RepositoryUsageDAOImpl extends UsageDAOImpl implements RepositoryUsageDAO {
+public class RepositoryUsageDAOImpl implements RepositoryUsageDAO {
 
-    final static Logger logger = LoggerFactory.getLogger(RepositoryUsageDAOImpl.class);
-    
-    private static final String SELECT_DOCUMENT_COUNT = "alfresco.usage.select_GetDocumentCount";
+	final static Logger logger = LoggerFactory.getLogger(RepositoryUsageDAOImpl.class);
+
+	private CannedQueryDAO cannedQueryDAO;
+
+	public void setCannedQueryDAO(CannedQueryDAO cannedQueryDAO) {
+		this.cannedQueryDAO = cannedQueryDAO;
+	}
 
 	@Override
 	public long getDocumentCount() {
-		long count = 99L;
-		logger.debug("document count={}", count);
+		Long count = cannedQueryDAO.executeCountQuery("acme.query.repositoryUsage", "select_DocumentCount", null);
+		logger.debug("Counted documents:" + count);
 		return count;
 	}
-	
+
 }
